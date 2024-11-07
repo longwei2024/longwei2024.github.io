@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>标题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lw {
+            width: 1270px;
+            height: 710px;
+            margin: 60px auto;
+        }
+        .begin {
+            width: 320px;
+            height: 320px;
+        }
+
+        .begin img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .list {
+            position: relative;
+            width: 640px;
+            height: 640px;
+            background-color: antiquewhite;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .list li {
+
+            width: 213.33px;
+            height: 213.33px;
+            font-size: 0;
+            position: absolute;
+            transition: all .3s;
+            overflow: hidden;
+            left: 0;
+            top: 0;
+
+        }
+
+        .list li::after {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            content: "";
+            box-shadow: 0 0 10px 0 white inset;
+            z-index: 3;
+            left: 0;
+            top: 0;
+        }
+
+        .list li img {
+            position: absolute;
+            width: 640px;
+            left: 0;
+            top: 0;
+        }
+
+        li.active::after {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            content: "";
+            box-shadow: 0 0 10px 0 black inset;
+            z-index: 3;
+            left: 0;
+            top: 0;
+        }
+
+        .choose {
+            width: 320px;
+            height: 320px;
+            position: absolute;
+            right: 300px;
+            bottom: -20px
+        }
+
+        option {
+            padding: 10px 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.809);
+            text-align: center;
+            color: white;
+
+        }
+
+        option.active {
+            background-color: aqua;
+            color: black;
+        }
+
+        .begin {
+            position: absolute;
+            right: 300px;
+        }
+
+        .btn {
+            width: 320px;
+            position: absolute;
+            right: 300px;
+            bottom: 400px;
+            display: flex;
+            justify-content: space-between;
+            /* display: none; */
+        }
+
+        button {
+            padding: 10px 59px;
+            border: 1px solid white;
+            background-color: #313131;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lw">
+        <div class="begin">
+            <img src="./img/anime0.webp" alt="">
+        </div>
+        <ul class="list">
+        </ul>
+        <div class="btn">
+            <button class="lef">上一关</button>
+            <button class="rig">下一关</button>
+        </div>
+
+        <div class="choose">
+            <option class="active" value="9" selected>简单</option>
+            <option value="16">中等</option>
+            <option value="25">困难</option>
+            <option value="36">地狱</option>
+        </div>
+    </div>
+
+
+    <script>
+
+        var lw = document.querySelector(".lw")
+        var ul = document.querySelector("ul")
+        var choose = document.querySelector(".choose")
+        var thelevel = document.querySelectorAll("option")
+        var img = document.querySelector(".begin img")
+
+        var btn_left = document.querySelector(".lef")
+        var btn_right = document.querySelector(".rig")
+        var page = 0
+        var one = 9
+
+        var imglink = `./img/anime0.webp`
+        btn_left.onclick = function () {
+            page--
+            console.log(page);
+            if (page < 0) {
+                page = 4
+            }
+            img.setAttribute('src', `./img/anime${page}.webp`)
+
+            imglink = img.getAttribute('src')
+        }
+        console.log(imglink);
+
+        btn_right.onclick = function () {
+            page++
+            console.log(page);
+            if (page > 4) {
+                page = 0
+            }
+            img.setAttribute('src', `./img/anime${page}.webp`)
+            imglink = img.getAttribute('src')
+            ul.innerHTML = "";
+            level(one, imglink);
+        }
+
+
+
+        choose.addEventListener("click", function (event) {
+            var target = event.target
+            one = Number(target.value)
+            for (var i = 0; i < thelevel.length; i++) {
+                thelevel[i].classList.remove("active")
+            }
+            target.classList.add("active")
+            console.log(one);
+            ul.innerHTML = ""
+            level(one, imglink)
+        })
+
+        var level = function (num, link) {
+
+            var ul = document.querySelector("ul")
+            var ulwidth = ul.offsetWidth
+            console.log(num);
+
+            for (var j = 0; j < num; j++) {
+                var li = document.createElement("li")
+                li.innerHTML = `<img src="${link}" alt="">`
+                ul.appendChild(li)
+
+            }
+            var lis = ul.querySelectorAll("li")
+            var xy = Math.sqrt(num)
+
+            var arr = []
+            for (var i = 0; i < lis.length; i++) {
+                arr.push(i)
+            }
+            arr.sort(() => Math.random() - 0.5)
+
+            lis.forEach((item, index) => {
+                item.style.width = ulwidth / xy + "px"
+                item.style.height = ulwidth / xy + "px"
+
+                item.dataset.key1 = index
+                item.dataset.key2 = arr[index]
+
+                item.style.top = Math.floor(item.dataset.key2 / xy) * (ulwidth / xy) + "px"
+                item.style.left = (item.dataset.key2 % xy) * (ulwidth / xy) + "px"
+
+                var img = item.querySelector("img")
+                img.style.top = Math.floor(index / xy) * -(ulwidth / xy) + "px"
+                img.style.left = (index % xy) * -(ulwidth / xy) + "px"
+
+            })
+            var arrClick = []
+            ul.onclick = event => {
+                var target = event.target
+                if (target.tagName !== "LI") {
+                    target = target.parentNode
+                }
+                if (target.tagName === "LI") {
+                    target.classList.add("active")
+
+                    setTimeout(() => {
+                        arrClick.push(target)
+                        if (arrClick.length == 2) {
+                            var temp = arrClick[0].dataset.key2
+                            arrClick[0].dataset.key2 = arrClick[1].dataset.key2
+                            arrClick[1].dataset.key2 = temp
+
+                            arrClick.forEach((li) => {
+                                li.classList.remove("active")
+
+                                li.style.top = Math.floor(li.dataset.key2 / xy) * (ulwidth / xy) + "px"
+                                li.style.left = (li.dataset.key2 % xy) * (ulwidth / xy) + "px"
+
+                            })
+                            var isOver = Array.prototype.slice.call(lis).every((li) => {
+                                return li.dataset.key1 == li.dataset.key2
+                            })
+                            arrClick = []
+                            setTimeout(() => {
+                                if (isOver) {
+                                    alert("拼图完成")
+                                }
+                            }, 500)
+                        }
+                    }, 100)
+                }
+
+            }
+
+        }
+        level(one, imglink)
+    </script>
+</body>
+
+</html>
