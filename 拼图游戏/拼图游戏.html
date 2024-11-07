@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .orgin {
+                width: 300px;
+                height: 300px;
+            }
+            .orgin img {
+                width: 100%;
+            }
+
+            ul.stage {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                width: 300px;
+                height: 300px;
+                background-color: rgb(240, 240, 240);
+
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                padding: 10px;
+
+                position: relative;
+            }
+            ul.stage li {
+                width: 96px;
+                height: 96px;
+                overflow: hidden;
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: 2px;
+                transition: all 0.3s;
+                border-radius: 5px;
+            }
+            ul.stage li.active {
+                box-shadow: 0 0 8px 0 #ff0000;
+            }
+            ul.stage li img {
+                width: 300%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="orgin">
+            <img src="../1008/banner1.jpg" alt="" />
+        </div>
+
+        <ul class="stage">
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+            <li><img src="../1008/banner1.jpg" alt="" /></li>
+        </ul>
+
+        <script>
+            var stage = document.querySelector(".stage");
+            var lis = stage.querySelectorAll("li");
+
+            var arr = [];
+            for (var i = 0; i < lis.length; i++) {
+                arr.push(i);
+            }
+            arr.sort(() => Math.random() - 0.5);
+            
+            lis.forEach((li, index) => {
+                // 设置自定义属性
+                li.dataset.o = index;
+                li.dataset.c = arr[index];
+                li.style.top = Math.floor(li.dataset.c / 3) * 100 + 10 + "px";
+                li.style.left = (li.dataset.c % 3) * 100 + 10 + "px";
+
+                // 读取自定义属性
+                // console.log(li.dataset.o);
+
+                var img = li.querySelector("img");
+                img.style.top = Math.floor(index / 3) * -96 + "px";
+                img.style.left = (index % 3) * -96 + "px";
+            });
+
+            var clickedLis = [];
+            stage.onclick = function (event) {
+                var target = event.target;
+                // 如果点击图片 那么就找img的父级
+                if (target.tagName == "IMG") {
+                    target = target.parentNode;
+                }
+                // console.log(target);
+                // 如果是li就...
+                if (target.tagName === "LI") {
+                    // 获取当前的 位置序号
+                    // console.log(target.dataset.c);
+                    clickedLis.push(target);
+                    target.classList.add("active");
+
+                    // 判断长度是2两个交换
+                    if (clickedLis.length === 2) {
+                        setTimeout(() => {
+                            // 交换data-c
+                            var tmp = clickedLis[0].dataset.c;
+                            clickedLis[0].dataset.c = clickedLis[1].dataset.c;
+                            clickedLis[1].dataset.c = tmp;
+
+                            // 重新计算交换完成的li的位置
+                            clickedLis.forEach((li) => {
+                                li.style.top = Math.floor(li.dataset.c / 3) * 100 + 10 + "px";
+                                li.style.left = (li.dataset.c % 3) * 100 + 10 + "px";
+                            });
+
+                            // 等待过渡完成之后
+                            console.log(777);
+
+                            var canClick = true;
+                            clickedLis[0].ontransitionend = function () {
+                                if (canClick) {
+                                    canClick = false;
+                                    console.log(this, 123);
+
+                                    // =================
+                                    // 判断是否拼图完成
+                                    // 遍历所有li 判断是不是 每一个都 data-o 和 data-c 相等
+                                    var isFinished = Array.prototype.slice.call(lis).every((li) => {
+                                        return li.dataset.o == li.dataset.c;
+                                    });
+
+                                    // 如果完成就提示
+                                    if (isFinished) {
+                                        alert("拼图完成");
+                                    }
+                                    // ==============
+
+                                    setTimeout(() => {
+                                        canClick = true;
+                                    }, 100);
+                                }
+                            };
+
+                            // debugger;
+                            // 交换完成之后清除数组
+                            clickedLis[0].classList.remove("active");
+                            clickedLis[1].classList.remove("active");
+                            clickedLis = [];
+                        }, 300);
+                    }
+                }
+            };
+        </script>
+
+        <script>
+            var arr = [1, 2, 3, 4, 5];
+            // var arr = [1, 3, 3, 7, 0, 5];
+            // 判断是不是都是奇数
+            var res = arr.every((item) => item % 2);
+            console.log(res);
+
+            arr.sort(function (a, b) {
+                // return b - a;
+                return Math.random() - 0.5;
+            });
+        </script>
+
+        <!-- 作业:加上难度选择 6*6 9*9 -->
+    </body>
+</html>
