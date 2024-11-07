@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="./也字工厂风满袖行楷.ttf">
+	<title>标题</title>
+	<style>
+		@font-face {
+            font-family: 'MyLocalFont';
+            src: url('./也字工厂风满袖行楷.ttf') format('woff2');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MyLocalFont', sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        #main {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #fff;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        ul {
+            display: flex;
+            min-height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        ul li {
+            list-style: none;
+            position: relative;
+            flex: 1;
+            margin: 0 5px;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        ul li:hover {
+            flex: 5;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        ul li div.background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 0.6s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        ul li:hover div.background {
+            transform: scale(1.1);
+        }
+
+        ul li div.des {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.7) 0%,
+                rgba(0,0,0,0.3) 50%,
+                rgba(0,0,0,0.7) 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        ul li:hover div.des {
+            opacity: 1;
+        }
+
+        ul li div.des h4 {
+            color: #FFF;
+            font-size: 2.5em;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 8px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        ul li:hover div.des h4 {
+            transform: translateY(0);
+        }
+
+        /* 添加发光效果 */
+        ul li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+
+        ul li:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* 加载提示样式 */
+        .loading-tip {
+            text-align: center;
+            color: #fff;
+            font-size: 1.2em;
+            margin-top: 20px;
+            opacity: 0.7;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.4; }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            ul {
+                flex-direction: column;
+                height: auto;
+            }
+
+            ul li {
+                height: 100px;
+                margin: 5px 0;
+            }
+
+            ul li:hover {
+                height: 300px;
+            }
+
+            ul li div.des h4 {
+                writing-mode: horizontal-tb;
+                text-orientation: mixed;
+                font-size: 2em;
+            }
+        }
+	</style>
+</head>
+
+<body>
+	<div id="main">
+        <h1 class="title">原神角色展示</h1>
+        <ul>
+            <li>
+                <div class="background" style="background-image: url(./img/魈.jpg)"></div>
+                <div class="des">
+                    <h4>魈</h4>
+                </div>
+            </li>
+            <li>
+                <div class="background" style="background-image: url(./img/云堇.jpg)"></div>
+                <div class="des">
+                    <h4>云堇</h4>
+                </div>
+            </li>
+            <li>
+                <div class="background" style="background-image: url(./img/八重神子2.jpg)"></div>
+                <div class="des">
+                    <h4>八重神子</h4>
+                </div>
+            </li>
+            <li>
+                <div class="background" style="background-image: url(./img/宵宫.jpg)"></div>
+                <div class="des">
+                    <h4>宵宫</h4>
+                </div>
+            </li>
+            <li>
+                <div class="background" style="background-image: url(./img/申鹤.jpg)"></div>
+                <div class="des">
+                    <h4>申鹤</h4>
+                </div>
+            </li>
+            <li>
+                <div class="background" style="background-image: url(./img/神里绫华.jpg)"></div>
+                <div class="des">
+                    <h4>神里绫华</h4>
+                </div>
+            </li>
+        </ul>
+        <div class="loading-tip">请耐心等待图片加载完成后移入...</div>
+    </div>
+
+
+	
+</body>
+<script src=" ./jquery-3.7.1.min.js">
+</script>
+<script>
+	window.onload = function() {
+            document.querySelector('.loading-tip').style.display = 'none';
+        }
+	$('.des').hide()
+	$('ul').stop().on('mouseenter', 'li', function () {
+		$(this).stop().animate({ width: 400 }).children('.des').show()
+	})
+	$('ul').on('mouseleave', 'li', function () {
+		$(this).stop().animate({ width: 200 }).children('.des').hide()
+	})
+</script>
+
+</html>
