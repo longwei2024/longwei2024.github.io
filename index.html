@@ -5,29 +5,237 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>标题</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./index.css">
     <style>
-        button{
-            padding: 40px;
-            background-color: pink;
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #1a1c20, #2d3436);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            padding: 50px 20px;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            animation: fadeIn 1s ease;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: slideUp 0.5s ease backwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            padding: 30px;
+        }
+
+        button {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+
+        button i {
+            margin-right: 15px;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover button i {
+            transform: scale(1.2);
+        }
+
+        .card:hover button {
+            color: #4CAF50;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 添加响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .title {
+                font-size: 2em;
+            }
+        }
+
+        /* 添加鼠标悬停时的波纹效果 */
+        .ripple {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <a target="_blank" href="./手风琴/作业2-手风琴.html">
-        <button>手风琴</button>
-    </a>
-    <a target="_blank" href="./拼图游戏/拼图游戏.html">
-        <button>拼图游戏</button>
-    </a>
-    <a target="_blank" href="./拼图游戏/拼图游戏.html">
-        <button>拼图游戏</button>
-    </a>
-    <a target="_blank" href="./拼图游戏/拼图游戏.html">
-        <button>拼图游戏</button>
-    </a>
-
+    <h1 class="title">项目导航</h1>
+    <div class="container">
+        <div class="card">
+            <a target="_blank" href="./手风琴/作业2-手风琴.html">
+                <button>
+                    <i class="fas fa-images"></i>
+                    手风琴图片展示
+                </button>
+            </a>
+        </div>
+        <div class="card">
+            <a target="_blank" href="./拼图游戏/拼图游戏.html">
+                <button>
+                    <i class="fas fa-puzzle-piece"></i>
+                    拼图游戏
+                </button>
+            </a>
+        </div>
+        <div class="card">
+            <a target="_blank" href="./歌曲列表播放(ajax)/test3.html">
+                <button>
+                    <i class="fas fa-music"></i>
+                    歌曲搜索播放
+                </button>
+            </a>
+        </div>
+        <div class="card">
+            <a target="_blank" href="./在线娱乐游戏(Bootstrap)/index.html">
+                <button>
+                    <i class="fas fa-gamepad"></i>
+                    在线娱乐游戏
+                </button>
+            </a>
+        </div>
+        <div class="card">
+            <a target="_blank" href="./动漫壁纸(Bootstrap)/index.html">
+                <button>
+                    <i class="fas fa-image"></i>
+                    动漫壁纸
+                </button>
+            </a>
+        </div>
+        <div class="card">
+            <a target="_blank" href="./数据可视化/index.html">
+                <button>
+                    <i class="fas fa-chart-line"></i>
+                    数据可视化系统
+                </button>
+            </a>
+        </div>
+    </div>
 
     <script>
+         document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                let ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+                
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
 
 
     </script>
