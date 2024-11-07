@@ -1,0 +1,9 @@
+.head .container{
+    position: relative;
+}
+.navbar{
+    position: absolute;
+    right: 0;
+}
+
+   
