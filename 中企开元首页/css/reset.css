@@ -1,0 +1,76 @@
+/* 初始化网页标签的默认样式 */
+body,
+div,
+span,
+a,
+h1,h2,h3,h3,h4,h5,h6,
+p,
+ul,ol,
+form,
+header,
+footer,
+main,
+aside,
+nav,
+section {
+    padding: 0;
+    margin: 0;
+    /* 改变盒子大小计算方式 */
+    box-sizing: border-box;
+}
+
+/* 
+盒子（标签）的实际大小： 边框 + 内边距 + 内容
+设置 box-sizing: border-box 属性
+盒子（标签）的大小： 内容
+*/
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+    color: #000000;
+    text-decoration: none;
+}
+
+input , button {
+    /* 没有边框 */
+    border: 0;
+    /* 移除外边框 */
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* 列表标签的默认样式 */
+ul , ol {
+    list-style: none;
+}
+
+/* 行内标签的垂直对齐 */
+img , button , input {
+    vertical-align: middle;
+}
+
+
+
+/* 版心 (水平居中的盒子)*/
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/* 浮动 */
+.f-left {
+    float: left;
+}
+.f-right {
+    float: right;
+}
+/* 伪类清除浮动 */
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}

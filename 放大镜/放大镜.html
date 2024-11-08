@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="./img/放大镜 (1).png">
+    
+    <title>放大镜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+        .lw {
+            margin-top: 20px;
+            margin-left: 256px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .app {
+            display: flex;
+            gap: 20px;
+        }
+
+        .left {
+            width: 640px;
+            height: 640px;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mask {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: move;
+            pointer-events: none;
+            /* 确保鼠标事件能穿透到底层 */
+        }
+
+        .right {
+            margin-left: 20px;
+            width: 640px;
+            height: 640px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .right img {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .img_list {
+            width: 600px;
+            background: rgba(255, 255, 255, 0.3);
+            margin-top: 20px;
+            margin-left: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .img_list img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .img_list img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .end {
+            display: flex;
+            align-items: center;
+        }
+
+        .inp {
+            margin-top: 20px;
+            width: 620px;
+            margin-left: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            height: 121px;
+        }
+
+        .inp input {
+            -webkit-appearance: none;
+            width: 500px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            margin: 0 30px;
+        }
+
+        .inp input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #0075FF;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .inp input::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        span {
+            font-size: 30px;
+            font-weight: 700;
+            color: #0075FF;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .img_list img.active {
+            border: 3px solid #0075FF;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 117, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lw">
+        <div class="app">
+            <div class="left">
+                <div class="mask"></div>
+                <img src="./img/dragon.webp" alt="">
+            </div>
+            <div class="right">
+                <img src="./img/dragon.webp" alt="">
+            </div>
+        </div>
+        <div class="end">
+            <div class="img_list">
+                <img src="./img/dragon.webp" alt="">
+                <img src="./img/anime.webp" alt="">
+                <img src="./img/anime2.webp" alt="">
+                <img src="./img/anime3.webp" alt="">
+                <img src="./img/ai.webp" alt="">
+            </div>
+            <div class="inp">
+                <input type="range" min="2" max="10" value="2"><span>2</span>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var left = document.querySelector(".left")
+        var mask = document.querySelector(".mask")
+        var leftimg = document.querySelector(".left img")
+        var right = document.querySelector(".right img")
+        var list = document.querySelectorAll(".img_list img")
+        var inp = document.querySelector(".inp input")
+        var span = document.querySelector(".inp span")
+
+
+
+        for (var i = 0; i < list.length; i++) {
+            list[i].onclick = function () {
+                // 移除其他图片的高亮
+                list.forEach(img => img.classList.remove('active'));
+                // 添加当前图片的高亮
+                this.classList.add('active');
+
+                var c = this.getAttribute("src");
+                leftimg.src = c;
+                right.src = c;
+            }
+        }
+
+        // 初始化时给第一张图片添加高亮
+        list[0].classList.add('active');
+
+
+        var foo = function (much) {
+            left.onmousemove = event => {
+                mask.style.width = left.offsetWidth / much + "px"
+                mask.style.height = left.offsetHeight / much + "px"
+                right.style.width = left.offsetWidth * much + "px"
+                right.style.height = left.offsetHeight * much + "px"
+                var x = event.pageX - left.offsetLeft
+                var y = event.pageY - left.offsetTop
+                x = x - mask.offsetWidth / 2
+                y = y - mask.offsetHeight / 2
+                if (x < 0) {
+                    x = 0
+                }
+                if (x > left.offsetWidth - mask.offsetWidth) {
+                    x = left.offsetWidth - mask.offsetWidth
+                }
+                if (y < 0) {
+                    y = 0
+                }
+                if (y > left.offsetHeight - mask.offsetHeight) {
+                    y = left.offsetHeight - mask.offsetHeight
+                }
+                mask.style.left = x + "px"
+                mask.style.top = y + "px"
+
+                right.style.left = -x * much + "px"
+                right.style.top = -y * much + "px"
+
+            }
+
+        }
+        foo(2)
+
+        inp.oninput = function (e) {
+            var num = inp.value
+            span.innerText = num
+            foo(span.innerText)
+        }
+
+
+    </script>
+</body>
+
+</html>

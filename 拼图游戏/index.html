@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>标题</title>
+    <link rel="shortcut icon" href="./img/拼图.png">
+    <title>拼图游戏</title>
     <style>
         * {
             margin: 0;
@@ -18,6 +19,7 @@
             height: 710px;
             margin: 60px auto;
         }
+
         .begin {
             width: 320px;
             height: 320px;
@@ -84,10 +86,10 @@
 
         .choose {
             width: 320px;
-            height: 320px;
+            /* height: 320px; */
             position: absolute;
             right: 300px;
-            bottom: -20px
+            bottom: 220px
         }
 
         option {
@@ -113,7 +115,7 @@
             width: 320px;
             position: absolute;
             right: 300px;
-            bottom: 400px;
+            bottom: 460px;
             display: flex;
             justify-content: space-between;
             /* display: none; */
@@ -193,13 +195,16 @@
         choose.addEventListener("click", function (event) {
             var target = event.target
             one = Number(target.value)
-            for (var i = 0; i < thelevel.length; i++) {
-                thelevel[i].classList.remove("active")
+            if (target.tagName == "OPTION") {
+                for (var i = 0; i < thelevel.length; i++) {
+                    thelevel[i].classList.remove("active")
+                }
+                target.classList.add("active")
+                console.log(one);
+                ul.innerHTML = ""
+                level(one, imglink)
             }
-            target.classList.add("active")
-            console.log(one);
-            ul.innerHTML = ""
-            level(one, imglink)
+
         })
 
         var level = function (num, link) {
@@ -215,6 +220,63 @@
 
             }
             var lis = ul.querySelectorAll("li")
+
+            lis.forEach(li => {
+                li.setAttribute('draggable', true);
+
+                // 添加拖拽事件监听
+                li.addEventListener('dragstart', handleDragStart);
+                li.addEventListener('dragover', handleDragOver);
+                li.addEventListener('drop', handleDrop);
+                li.addEventListener('dragend', handleDragEnd);
+            });
+
+            var dragSrcEl = null;
+
+            function handleDragStart(e) {
+                dragSrcEl = this;
+                this.classList.add('active');
+            }
+
+            function handleDragOver(e) {
+                e.preventDefault();
+            }
+
+            function handleDrop(e) {
+                e.preventDefault();
+                if (this === dragSrcEl) return;
+
+                // 交换位置
+                let temp = dragSrcEl.dataset.key2;
+                dragSrcEl.dataset.key2 = this.dataset.key2;
+                this.dataset.key2 = temp;
+
+                // 更新位置
+                [dragSrcEl, this].forEach(li => {
+                    li.style.top = Math.floor(li.dataset.key2 / xy) * (ulwidth / xy) + "px";
+                    li.style.left = (li.dataset.key2 % xy) * (ulwidth / xy) + "px";
+                });
+
+                // 检查是否完成
+                setTimeout(() => {
+                    var isOver = Array.prototype.slice.call(lis).every((li) => {
+                        return li.dataset.key1 == li.dataset.key2;
+                    });
+                    if (isOver) {
+                        alert("拼图完成");
+                    }
+                }, 300);
+            }
+
+            function handleDragEnd() {
+                this.classList.remove('active');
+            }
+
+            // 保持原有的点击交换功能
+            var arrClick = [];
+            ul.onclick = event => {
+                // ... 保持原有代码不变 ...
+            }
             var xy = Math.sqrt(num)
 
             var arr = []
@@ -238,6 +300,25 @@
                 img.style.left = (index % xy) * -(ulwidth / xy) + "px"
 
             })
+            function handleDragStart(e) {
+                dragSrcEl = this;
+                this.classList.add('active');
+
+                // 设置拖拽时的预览图像
+                var crt = this.cloneNode(true);
+                crt.style.position = "absolute";
+                crt.style.top = "-9999px";
+                document.body.appendChild(crt);
+                e.dataTransfer.setDragImage(crt, 0, 0);
+
+                // 使用setTimeout确保克隆的元素会被移除
+                setTimeout(() => {
+                    document.body.removeChild(crt);
+                }, 0);
+
+                // 设置允许的拖拽效果
+                e.dataTransfer.effectAllowed = 'move';
+            }
             var arrClick = []
             ul.onclick = event => {
                 var target = event.target
@@ -275,7 +356,14 @@
                 }
 
             }
+            function handleDragStart(e) {
+                dragSrcEl = this;
+                this.classList.add('active');
 
+                // 创建一个空的透明图片作为拖拽预览
+                e.dataTransfer.setDragImage(new Image(), 0, 0);
+                e.dataTransfer.effectAllowed = 'move';
+            }
         }
         level(one, imglink)
     </script>

@@ -1,0 +1,345 @@
+.lw {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+/* 头部 */
+.lw .head {
+    width: 100%;
+    height: 40px;
+    background-color: #333333;
+
+}
+.lw .head .container {
+    text-align: end;
+    line-height: 40px;
+}
+.lw .head span {
+    color: white;
+    margin-left: 40px;
+}
+/* 导航栏 */
+.lw .nav {
+    width: 100%;
+    height: 80px;
+}
+.lw .nav .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.lw .nav .container .nav_right {
+    height: 100%;
+}
+.lw .nav .container .nav_right .nav_list{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.nav_list li{
+    width: 120px;
+    height: 100%;
+    text-align: center;
+    line-height: 80px;
+}
+.nav_list li:nth-child(1){
+    background-color: #107CD6;
+    color: white;
+}
+.nav_list li:hover{
+    color: white;
+    background-color: #107CD6;
+}
+/* banner图 */
+.lw .banner {
+    position: relative;
+    width: 100%;
+    height: 543px;
+    background-image: url(../images/banner2.png);
+    background-size: cover;
+}
+.lw .banner .container {
+    position: relative;
+}
+.lw .banner .container h1,
+.lw .banner .container p,
+.lw .banner .container button{
+    position: absolute;
+    right: 0;
+}
+.lw .banner .container h1{
+    top: 80px;
+    display: block;
+    margin: 30px 0;
+    font-size: 60px;
+    color: #035ABD;
+}
+.lw .banner .container p {
+    font-size: 25px;
+    top: 190px;
+    letter-spacing: 10px;
+    color: #C1C2C2;
+}
+.lw .banner .container button {
+    top: 260px;
+    width: 160px;
+    height: 40px;
+    background-color: #357CCC;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.lw .banner .left_arrow,
+.lw .banner .right_arrow{
+    position: absolute;
+}
+.lw .banner .left_arrow{
+    left: 0;
+    background-position: -108px -235px;
+    width: 40px;
+	height: 75px;
+    top: 50%;
+    margin-top: -37.5px;
+}
+.lw .banner .right_arrow{
+    right: 0;
+    background-position: -174px -320px;
+    width: 40px;
+	height: 75px;
+    top: 50%;
+    margin-top: -37.5px;
+}
+.icon {
+    background-image: url(../images/icons.png);
+    background-repeat: no-repeat;
+}
+/* 主要业务 */
+
+.lw .important {
+    width: 100%;
+}
+.lw .important .impor_top{
+    width: 100%;
+    height: 100px;
+    background-color: #F0F5F9;
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+    justify-content: center;
+}
+.impor_top h2{
+    display: flex;
+    justify-content: center;
+    letter-spacing: 50px;
+    margin-left: 40px;
+}
+.impor_top p {
+    margin-top: 10px;
+    letter-spacing: 10px;
+    /* text-align: center; */
+}
+.impor_center{
+    width: 100%;
+    height: 300px;
+}
+.impor_center .container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.impor_center .container .part1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.impor_center .container .part1 h3{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.impor_center .container .part1 p {
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+.icon_1{
+    width: 56px;
+	height: 56px;
+    background-position: -108px -70px;
+}
+.icon_2{
+    width: 56px;
+	height: 56px;
+    background-position:  -174px -70px;
+}
+.icon_3{
+    width: 56px;
+	height: 56px;
+    background-position:  -240px -70px;
+}
+.icon_4{
+    width: 56px;
+	height: 56px;
+    background-position: -306px -70px;
+}
+
+
+
+/* 服务项目 */
+.project {
+    width: 100%;
+    height: 600px;
+    background-color: #F6F6F6;
+    text-align: center;
+}
+.project  .impor_top {
+    width: 100%;
+    text-align: center;
+    padding: 60px;
+}
+.project .container {
+    display: flex;
+    justify-content: space-between;
+}
+.project .container .the1 img{
+    margin-bottom: 20px;
+}
+.more {
+    width: 100px;
+    height: 30px;
+    background-color: #337AC3;
+    color: white;
+    border-radius: 15px;
+    margin-top: 60px;
+    cursor: pointer;
+}
+/* 新闻中心 */
+.news {
+    width: 100%;
+    height: 600px;
+    background-color: #1663B1;
+    text-align: center;
+}
+.news  .impor_top {
+    width: 100%;
+    text-align: center;
+    padding: 60px;
+    color: white;
+}
+.news .container {
+    display: flex;
+    flex-direction: column;
+}
+.boxtop {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.box1{
+    display: flex;
+    height: 100px;
+    width: 620px;
+    margin-bottom: 80px;
+}
+.box_r {
+    width: 350px;
+    height: 150px;
+    background-color: white;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+.box_r h4 {
+    text-align: left;
+    font-weight:600;
+    font-size: 16px;
+}
+.box_r .time {
+    margin-top: 6px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 14px;
+}
+.box_r .msg {
+    text-align: left;
+    display: block;
+    width: 300px;
+    font-size: 14px;
+}
+/* 联系方式地址 */
+.fg {
+    width: 100%;
+    height: 20px;
+    background-color: #D6D3CE;
+}
+.about {
+    width: 100%;
+    height: 350px;
+    background-color: #D0D0D0;
+}
+.about .container {
+    display: flex;
+    justify-content: space-between;
+}
+.about_l {
+    padding-top: 30px;
+}
+.about_l h3, .el {
+    color: #797979;
+}
+.about_l h3 {
+    font-size: 30px;
+}
+.about_l .el {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+.el1 {
+   color: #797979; 
+   margin-bottom: 7px;
+}
+.el2 {
+   color: #797979; 
+   margin-top: 40px;
+}
+.num {
+    padding-top: 80px;
+}
+.num span {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #797979;
+}
+.phone {
+    display: inline-block;
+    background-position: -107px 0;
+    width: 35px;
+	height: 34px;
+    
+}
+.diz {
+    margin-left: 40px;
+    font-weight: 700;
+    margin-top: 30px;
+    font-size: 14px;
+    width: 200px;
+}
+/* 底部 */
+.end{
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.452);
+    background-color: #333333;
+    text-align: center;
+    line-height: 40px;
+}
+
+
+
+
