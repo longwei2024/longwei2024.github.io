@@ -31,7 +31,7 @@
             height: 100%;
             /* height: 920px; */
             /* background: radial-gradient(#3374a0, #003366) */
-            background-color: #003366;
+            background: radial-gradient(#002be9, #020940)
         }
 
         .head {
@@ -189,6 +189,8 @@
             right: 560px;
             filter: brightness(1.2);
             background-color: transparent;
+            border: 1px solid transparent;
+        border-radius: 10px;
         }
     </style>
 </head>
@@ -456,14 +458,9 @@
 
         var toolTipData = [
             {
-                name: '湖南',
-                value: 5,
+                name: '江西',
+                value: 460,
                 areas: ["长沙", "株洲", "益阳"]
-            },
-            {
-                name: '安徽',
-                value: 3,
-                areas: ["合肥", "芜湖"]
             },
             {
                 name: '山东',
@@ -491,8 +488,8 @@
                 areas: ["兰州", "嘉峪关", "天水", "酒泉"]
             },
             {
-                name: '西藏',
-                value: 74,
+                name: '广东',
+                value: 70,
                 areas: []
             }
         ];
@@ -571,16 +568,16 @@
             })
         }
         option5 = {
-            backgroundColor: "#003366",
+            backgroundColor: "transparent",
             title: {
                 show: true,
-                text: "项目分布图",
+                text: "店铺分布图",
                 x: 'center',
                 top: "10",
                 textStyle: {
                     color: "#fff",
-                    fontFamily: "等线",
-                    fontSize: 18,
+                    fontFamily: "douyin",
+                    fontSize: 32,
                 },
             },
             tooltip: {
@@ -608,7 +605,7 @@
                         return toolTiphtml;
                     }
                 },
-                backgroundColor: "#fff",
+                backgroundColor: "transparent",
                 borderColor: "#333",
                 padding: [5, 10],
                 textStyle: {
@@ -648,10 +645,10 @@
                             y2: 0,
                             colorStops: [{
                                 offset: 0,
-                                color: "rgba(3,27,78,0.75)", // 0% 处的颜色
+                                color: "rgba(3,27,78,0)", // 0% 处的颜色
                             }, {
                                 offset: 1,
-                                color: "rgba(58,149,253,0.75)", // 50% 处的颜色
+                                color: "rgba(58,149,253,0)", // 50% 处的颜色
                             },],
                             global: true, // 缺省为 false
                         },
@@ -705,7 +702,7 @@
                         shadowColor: "rgba(65, 214, 255,1)",
                         shadowOffsetY: 5,
                         shadowBlur: 15,
-                        areaColor: "transpercent",
+                        areaColor: "transparent",
                     },
                 },
             }, {
@@ -726,7 +723,7 @@
                         shadowColor: "rgba(58,149,253,1)",
                         shadowOffsetY: 15,
                         shadowBlur: 10,
-                        areaColor: "transpercent",
+                        areaColor: "transparent",
                     },
                 },
             }, {
@@ -752,6 +749,7 @@
                 },
             },],
             series: [
+                
                 {
                     type: 'map',
                     map: mapName,
