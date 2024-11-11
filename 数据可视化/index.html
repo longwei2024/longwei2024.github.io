@@ -916,7 +916,7 @@
                     },
                 },
                 formatter(res) {
-                    console.log(res)
+                    // console.log(res)
                     return '<p style="margin:-10px;padding:10px;width:200px;height:80px;">' + res[0].axisValue + "<br />" + res[0].seriesName + "：" + res[0].value + "<br />" + res[1].seriesName + "：" + res[1].value + '</p>'
                 }
             },
@@ -1327,7 +1327,7 @@
                                         toolTiphtml += toolTipData[i].name + "：" + toolTipData[i].value;
                                     }
                                 }
-                                console.log(toolTiphtml);
+                                // console.log(toolTiphtml);
                                 // console.log(convertData(data))
                                 return toolTiphtml;
                             } else {
@@ -1337,7 +1337,7 @@
                                         toolTiphtml += toolTipData[i].name + "：" + toolTipData[i].value;
                                     }
                                 }
-                                console.log(toolTiphtml);
+                                // console.log(toolTiphtml);
 
                                 return toolTiphtml;
                             }
@@ -1790,10 +1790,10 @@
                 type: "custom",
                 coordinateSystem: "none",
                 renderItem: function (params, api) {
-                    console.log(Math.min(
-                        api.getWidth(),
-                        api.getHeight()
-                    ) / 2.3)
+                    // console.log(Math.min(
+                    //     api.getWidth(),
+                    //     api.getHeight()
+                    // ) / 2.3)
                     return {
                         type: "arc",
                         shape: {
