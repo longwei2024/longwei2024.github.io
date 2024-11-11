@@ -204,14 +204,17 @@
         #echart6 {
             position: absolute;
             bottom: 20px;
-            right: 360px;
+            right: 560px;
         }
 
         #echart7 {
             position: absolute;
             bottom: 20px;
-            left: 600px;
+            left: 570px;
         }
+
+
+        
     </style>
 </head>
 
@@ -224,7 +227,7 @@
         <div id="echart3" style="width: 600px; height: 600px;"></div>
         <div id="echart4" style="width: 600px; height: 600px;"></div>
         <div id="echart5" style="width: 800px; height: 600px;"></div>
-        <div id="echart6" style="width: 800px; height: 120px;"></div>
+        <div id="echart6" style="width: 600px; height: 120px;"></div>
         <div id="echart7" style="width: 200px; height: 220px;"></div>
 
         <header class="head">
@@ -258,9 +261,11 @@
 
     </div>
 
+
+
     <script src="./jquery-3.5.1.min.js"></script>
     <!-- <script src="./echarts.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="./echarts@5.4.3.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/js/china.js"></script> -->
     <script src="./liquidfill.js"></script>
     <script src="./bmap.js"></script>
@@ -918,7 +923,7 @@
                 },
                 formatter(res) {
                     // console.log(res)
-                    return '<p style="margin:-10px;padding:10px;width:200px;height:80px;">' + res[0].axisValue + "<br />" + res[0].seriesName + "：" + res[0].value + "<br />" + res[1].seriesName + "：" + res[1].value + '</p>'
+                    return '<p style="margin:-10px;padding:10px;width:200px;height:80px; color: white">' + res[0].axisValue + "<br />" + res[0].seriesName + "：" + res[0].value + "<br />" + res[1].seriesName + "：" + res[1].value + '</p>'
                 }
             },
             legend: {
