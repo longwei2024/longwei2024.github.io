@@ -1643,13 +1643,13 @@
                 };
 
                 // 设置配置项...
-                myChart5.setOption(option5);
             })
             .catch(error => {
                 console.error('加载地图数据失败:', error);
                 myChart5.hideLoading();
             });
 
+            myChart5.setOption(option5);
 
 
 
