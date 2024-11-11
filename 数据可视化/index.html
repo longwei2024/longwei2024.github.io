@@ -1151,7 +1151,7 @@
         var chartDom5 = document.getElementById('echart5');
         var myChart5 = echarts.init(chartDom5);
         var option5;
-        fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+        fetch('./china.json')
             .then(response => response.json())
             .then(chinaJson => {
                 echarts.registerMap('china', chinaJson);
