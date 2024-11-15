@@ -111,7 +111,7 @@ VideoPlayer.prototype.addEvent = function () {
     }
     this.btn_max.onclick = function(){
         if (!_this.isFullScreen) {
-            _this.css.href = "./css/index copy.css";
+            _this.css.href = "./css/indexcopy.css";
             _this.isFullScreen = true;
             // 切换图标class
             _this.btn_max.children[0].className = "icon-min";
